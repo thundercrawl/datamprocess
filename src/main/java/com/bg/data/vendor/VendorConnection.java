@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.mysql.cj.jdbc.Driver;
 public class VendorConnection {
 	private Integer current_init_connection_number = 5;
 	private ArrayList<Connection> conns = new ArrayList<Connection>();
@@ -14,16 +15,16 @@ public class VendorConnection {
 		{
 			current_init_connection_number = init_conection;
 		}
-		
-		for(Integer i=0;i<current_init_connection_number;i++)
-		{
-			initConnections();
-		}
-			
+		initConnections();
 	}
-
-private void initConnections()
+public ArrayList<Connection> getConns()
 {
+	return conns;
+	}
+public void initConnections()
+{
+	for(Integer i=0;i<current_init_connection_number;i++)
+	{
 	if(conns.size()<current_init_connection_number)
 	{
 		Connection cnn = getConnection(db);
@@ -34,21 +35,33 @@ private void initConnections()
 	else
 		throw new RuntimeException("Max connections exceed, current:"+current_init_connection_number);
 	}
+}
 private Connection getConnection(VendorDB db)
 {
 	 try {
-		Class.forName("com.mysql.jdbc.Driver");
-		// Setup the connection with the DB
+		Class.forName("com.mysql.cj.jdbc.Driver");
 	    return DriverManager.getConnection(db.getDBURL(), db.getDBUser(), db.getDBPassword());
 	} catch (ClassNotFoundException e) {
 		e.printStackTrace();
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	} 
 	return null;
      
 	}
+
+public void stop()
+{
+	for(Connection c:conns)
+	{
+		try {
+			c.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
 	
 	public void ExecuteQuery()
 	{

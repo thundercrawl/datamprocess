@@ -1,6 +1,9 @@
 package com.bg.data.vendor.mysql;
 
-import org.junit.Test;
+
+
+import org.junit.jupiter.api.Test;
+
 import com.bg.data.vendor.mysql.MysqlConnectMGR;
 
 public class MysqlCOnnectionMGRTest {
@@ -13,6 +16,10 @@ public class MysqlCOnnectionMGRTest {
 			Thread.sleep(60*1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+		finally
+		{
+			MysqlConnectMGR.getInstance().stop();
 		}
 	}
 }

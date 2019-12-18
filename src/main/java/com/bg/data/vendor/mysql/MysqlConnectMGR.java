@@ -25,12 +25,19 @@ public static MysqlConnectMGR getInstance()
 private MysqlConnectMGR()
 {
 	//part can be set from config files, such as spring's application.properties
-	VendorDB v1 = new VendorDB("http://localhost:3306/employees?useSSL=false","root","passw0rd");
-	VendorDB v2 = new VendorDB("http://localhost:3306/employees?useSSL=false","root","passw0rd");
+	VendorDB v1 = new VendorDB("jdbc:mysql://localhost:3306/employees?useSSL=false","root","passw0rd");
+	VendorDB v2 = new VendorDB("jdbc:mysql://localhost:3306/employees?useSSL=false","root","passw0rd");
 	db2conns.put(v1, new VendorConnection(5,v1));
 	db2conns.put( v2,new VendorConnection(5,v2));
 	}
 
+public void stop()
+{
+	for(VendorConnection cnn:db2conns.values())
+	{
+		cnn.stop();
+	}
+	}
 
 }
 
