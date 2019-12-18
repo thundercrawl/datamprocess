@@ -1,0 +1,3 @@
+com/bg/data/vendor/VendorConnection.class
+com/bg/data/vendor/VendorDB.class
+com/bg/data/vendor/mysql/MysqlConnectMGR.class
