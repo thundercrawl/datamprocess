@@ -2,13 +2,14 @@ package com.bg.data.vendor;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.mysql.cj.jdbc.Driver;
-public class VendorConnection {
+public class VendorConnections {
 	private Integer current_init_connection_number = 5;
 	private ArrayList<Connection> conns = new ArrayList<Connection>();
 	private VendorDB db;
-	public VendorConnection(Integer init_conection,VendorDB db)
+	public VendorConnections(Integer init_conection,VendorDB db)
 	{
 		this.db = db;
 		if(current_init_connection_number < init_conection )
@@ -29,7 +30,7 @@ public void initConnections()
 	{
 		Connection cnn = getConnection(db);
 		if(cnn == null)
-			throw new RuntimeException("Failed to create connection");
+			throw new RuntimeException("Failed to create connection, url "+db.getDBURL());
 		conns.add(getConnection(db));
 	}
 	else
@@ -56,15 +57,27 @@ public void stop()
 	for(Connection c:conns)
 	{
 		try {
-			c.close();
+			c.close();	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 }
 	
-	public void ExecuteQuery()
+	@SuppressWarnings("finally")
+	public ResultSet ExecuteQuery(String sql)
 	{
+		ResultSet rt = null;
+		try {
+			rt = conns.get(0).prepareStatement(sql).executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally
+		{
+			return rt;
+		}
+		
 		
 	}
 }
