@@ -2,3 +2,4 @@ com/bg/data/vendor/VendorConnections.class
 com/bg/data/vendor/VendorDB.class
 com/bg/data/vendor/VendorSession.class
 com/bg/data/vendor/mysql/MysqlConnectMGR.class
+com/bg/mulitprocess/spark/RDDfromList.class

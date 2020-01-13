@@ -5,8 +5,12 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
+     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   	<mysql.version>8.0.18</mysql.version>
 	<junit.version>5.5.2</junit.version>
+	<spark.core>2.4.4</spark.core>
+	
 </properties>
 
  <dependencies>
@@ -18,10 +22,13 @@
 <dependency>
 		<groupId>org.junit.jupiter</groupId>
 		<artifactId>junit-jupiter-engine</artifactId>
-		<version>${junit.version}</version>
-		<scope>test</scope>
+		<version>5.5.2</version>
 	</dependency>
-  
+	<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-core_2.12</artifactId>
+    <version>${spark.core}</version>
+</dependency>
 </dependencies>
 
   
