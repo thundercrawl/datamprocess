@@ -17,12 +17,13 @@ public class RDDfromList {
     		loop = new Integer(args[0]);
     	}
     	
-    	do {
+    	
         SparkConf sparkConf = new SparkConf().setAppName("Spark RDD foreach Example")
                 .setMaster("local[2]").set("spark.executor.memory","2g");
         // start a spark context
         JavaSparkContext sc = new JavaSparkContext(sparkConf);
  
+        do {
         // read list to RDD
         List<String> data = Arrays.asList("Learn","Apache","Spark","with","Tutorial Kart"); 
         JavaRDD<String> items = sc.parallelize(data,1);
