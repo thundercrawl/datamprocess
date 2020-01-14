@@ -11,6 +11,13 @@ public class RDDfromList {
  
     public static void main(String[] args) {
         // configure spark
+    	Integer loop = 1;
+    	if(args.length == 1)
+    	{
+    		loop = new Integer(args[0]);
+    	}
+    	
+    	do {
         SparkConf sparkConf = new SparkConf().setAppName("Spark RDD foreach Example")
                 .setMaster("local[2]").set("spark.executor.memory","2g");
         // start a spark context
@@ -24,5 +31,6 @@ public class RDDfromList {
         items.foreach(item -> {
             System.out.println("* "+item); 
         });
-    }
+    	}while(--loop>0);
+    }	
 } 
