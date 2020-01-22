@@ -29,6 +29,13 @@
     <artifactId>spark-core_2.12</artifactId>
     <version>${spark.core}</version>
 </dependency>
+
+<dependency>
+    <groupId>org.apache.spark</groupId>
+    <artifactId>spark-sql_2.12</artifactId>
+    <version>${spark.core}</version>
+</dependency>
+
 </dependencies>
 
   

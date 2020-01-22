@@ -30,7 +30,8 @@ public class RDDfromList {
  
         // apply a function for each element of RDD
         items.foreach(item -> {
-            System.out.println("* "+item); 
+            System.out.println("* "+item);
+            Thread.sleep(1000*5);
         });
     	}while(--loop>0);
     }	
